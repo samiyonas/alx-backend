@@ -26,19 +26,19 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            """ get page of specified size """
-            thePage = []
-            page_info = [page, page_size]
-            assert all(isinstance(i, int) and i > 0 for i in page_info)
-            rang = list(index_range(page, page_size))
-            dataset = self.dataset()
+        """ get page of specified size """
+        thePage = []
+        page_info = [page, page_size]
+        assert all(isinstance(i, int) and i > 0 for i in page_info)
+        rang = list(index_range(page, page_size))
+        dataset = self.dataset()
 
-            if rang[0] >= len(dataset):
-                return thePage
-            if rang[1] >= len(dataset):
-                rang[1] = len(dataset)
-
-            for i in range(rang[0], rang[1]):
-                thePage.append(dataset[i])
-
+        if rang[0] >= len(dataset):
             return thePage
+        if rang[1] >= len(dataset):
+            rang[1] = len(dataset)
+
+        for i in range(rang[0], rang[1]):
+            thePage.append(dataset[i])
+
+        return thePage

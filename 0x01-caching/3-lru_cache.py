@@ -29,8 +29,8 @@ class LRUCache(BaseCaching):
         if key:
             try:
                 gotten = self.cache_data[key]
-                self.manage_lru.remove(gotten)
-                self.manage_lru.append(gotten)
+                self.manage_lru.remove(key)
+                self.manage_lru.append(key)
                 return gotten
             except Exception:
                 return None

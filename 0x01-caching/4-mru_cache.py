@@ -22,7 +22,7 @@ class MRUCache(BaseCaching):
 
                 del self.cache_data[discarded]
                 self.manage_mru.remove(discarded)
-                print("DISCARDED: {}".format(discarded))
+                print("DISCARD: {}".format(discarded))
 
     def get(self, key):
         """ returns the value in self.cache_data linked to key """

@@ -13,27 +13,27 @@ class LFUCache(BaseCaching):
         if key and item:
             if key not in self.manage_lfu_dict:
                 if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                    sorted_fl = sorted(
+                    s_fl = sorted(
                             self.manage_lfu_dict.items(),
                             key=lambda x: x[1]
                             )
-                    if sorted_fl[0][1] != sorted_fl[1][1]:
-                        del self.cache_data[sorted_fl[0][0]]
-                        discarded = sorted_fl[0][0]
+                    if len(s_fl) > 1 and s_fl[0][1] != s_fl[1][1]:
+                        del self.cache_data[s_fl[0][0]]
+                        discarded = s_fl[0][0]
 
                         self.manage_lfu.remove(discarded)
-                        del self.manage_lfu_dict[sorted_fl[0][0]]
+                        del self.manage_lfu_dict[s_fl[0][0]]
 
                         print("DISCARD: {}".format(discarded))
                     else:
                         x = []
-                        x.append(sorted_fl[0][0])
+                        x.append(s_fl[0][0])
 
-                        for i in range(len(sorted_fl)):
+                        for i in range(len(s_fl)):
                             if i == 0:
                                 continue
-                            if sorted_fl[0][1] == sorted_fl[i][1]:
-                                x.append(sorted_fl[i][0])
+                            if s_fl[0][1] == s_fl[i][1]:
+                                x.append(s_fl[i][0])
 
                         for j in self.manage_lfu:
                             if j in x:
